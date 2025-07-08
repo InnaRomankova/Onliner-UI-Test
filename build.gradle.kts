@@ -35,6 +35,11 @@ tasks {
     clean {
         delete("allure-results")
     }
+
+    allureReport {
+        dependsOn("test")
+        setProperty("clean", true)
+    }
 }
 
 java {
