@@ -31,6 +31,12 @@ tasks.test {
     finalizedBy("allureReport")
 }
 
+tasks {
+    clean {
+        delete("allure-results")
+    }
+}
+
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(17))
