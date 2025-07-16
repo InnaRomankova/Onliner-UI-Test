@@ -2,10 +2,8 @@ package by.onliner.core.element;
 
 import by.onliner.core.driver.WebDriverSingleton;
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -87,5 +85,19 @@ public class Element {
 
     public void switchToFrame() {
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
+    }
+
+    public void selectSecondOptionInDropdown() {
+        Actions actions = new Actions(webDriver);
+        actions
+                .moveToElement(getElement())
+                .click()
+                .sendKeys(Keys.ARROW_DOWN)
+                .click()
+                .perform();
+    }
+
+    public void refreshPage() {
+        webDriver.navigate().refresh();
     }
 }
