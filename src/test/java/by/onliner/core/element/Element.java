@@ -6,7 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -87,5 +89,15 @@ public class Element {
 
     public void switchToFrame() {
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
+    }
+
+    public void moveToElement() {
+        Actions actions = new Actions(webDriver);
+        actions.moveToElement(getElement()).perform();
+    }
+
+    public void selectOptionByValue(String optionValue) {
+        Select select = new Select(getElement());
+        select.selectByValue(optionValue);
     }
 }

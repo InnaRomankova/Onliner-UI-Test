@@ -11,7 +11,7 @@ public class SearchTest extends BaseTest {
     public void testSearchProduct() {
         MainPage mainPage = new MainPage();
         mainPage.typeTextInSearchField("Смартфон Samsung Galaxy 4GB/128GB (черный)");
-        SearchedProductPage searchedProductPage = mainPage.selectProductFromList(0);
+        SearchedProductPage searchedProductPage = mainPage.selectProductFromListByClickingOnProductName(0);
 
         Assertions.assertTrue(searchedProductPage.isCatalogMastheadContainsText
                 ("(?=.*Samsung)(?=.*Galaxy)(?=.*4GB/128GB)(?=.*\\(черный\\))(?=.*(Телефон|Смартфон)).*"));
