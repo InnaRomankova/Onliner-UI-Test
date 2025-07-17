@@ -14,7 +14,7 @@ public class ProductPricingPage {
     Element cartQuantityCounter = Element.byCssSelector(".auth-bar__counter");
 
     @Step("Select the option 'По возрастанию цены' in the dropdown 'Сортировать по умолчанию'")
-    public void selectByPriceAscendingOption() throws InterruptedException {
+    public void selectByPriceAscendingOption() {
         sortingElement.selectSecondOptionInDropdown();
     }
 
@@ -25,22 +25,22 @@ public class ProductPricingPage {
 
     @Step("Verify text 'Товар добавлен в корзину' appeared on the screen")
     public boolean verifyTextProductAddedToCartIsDisplayed() {
-        return  textProductAddedToCart.isDisplayed(5);
+        return textProductAddedToCart.isDisplayed(5);
     }
 
     @Step("Verify button 'Продолжить покупки' appeared on the screen")
     public boolean verifyButtonContinueShoppingIsDisplayed() {
-        return  buttonContinueShopping.getText().contains("Продолжить покупки");
+        return buttonContinueShopping.getText().contains("Продолжить покупки");
     }
 
     @Step("Verify button 'Перейти в корзину' appeared on the screen")
     public boolean verifyButtonGoToCartIsDisplayed() {
-        return  buttonGoToCart.getText().contains("Перейти в корзину");
+        return buttonGoToCart.getText().contains("Перейти в корзину");
     }
 
     @Step("Get an icon value of count shopping cart")
     public int getIconValueOfCountShoppingCart() {
         pageBody.refreshPage();
-        return  Integer.parseInt(cartQuantityCounter.getText());
+        return Integer.parseInt(cartQuantityCounter.getText());
     }
 }

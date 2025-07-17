@@ -31,6 +31,20 @@ tasks.test {
     finalizedBy("allureReport")
 }
 
+tasks.register("sanityTest", Test::class) {
+    useJUnitPlatform {
+        includeTags("sanity")
+    }
+    shouldRunAfter(tasks.test)
+}
+
+tasks.register("negativeTest", Test::class) {
+    useJUnitPlatform {
+        includeTags("negative")
+    }
+    shouldRunAfter(tasks.test)
+}
+
 tasks {
     clean {
         delete("allure-results")

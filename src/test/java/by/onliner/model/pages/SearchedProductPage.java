@@ -7,7 +7,7 @@ public class SearchedProductPage {
 
     Element catalogMasthead = Element.byTagName("h1");
 
-    @Step("Is catalog masthead contains text {productName}")
+    @Step("Is catalog masthead contains text {productNameRegExp}")
     public boolean isCatalogMastheadContainsText(String productNameRegExp) {
         return catalogMasthead.getText().matches(productNameRegExp);
     }
