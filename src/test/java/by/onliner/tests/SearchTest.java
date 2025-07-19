@@ -23,7 +23,7 @@ public class SearchTest extends BaseTest {
         SearchedProductPage searchedProductPage = mainPage.selectProductFromListByClickingOnProductName(0);
 
         Assertions.assertTrue(searchedProductPage.isCatalogMastheadContainsText
-                ("(?=.*Samsung)(?=.*Galaxy)(?=.*4GB/128GB)(?=.*\\(черный\\))(?=.*(Телефон|Смартфон)).*"),
+                        ("(?=.*Samsung)(?=.*Galaxy)(?=.*4GB/128GB)(?=.*\\(черный\\))(?=.*(Телефон|Смартфон)).*"),
                 "The page doesn't contains the name of phone");
     }
 }
