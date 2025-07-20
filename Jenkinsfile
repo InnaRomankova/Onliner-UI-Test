@@ -3,22 +3,22 @@ pipeline {
 
     parameters {
         choice(
-        name: 'TEST_SCENARIO',
-        choices: [
-            'test',
-            'sanityTest',
-            'negativeTest'
+            name: 'TEST_SCENARIO',
+            choices: [
+                'test',
+                'sanityTest',
+                'negativeTest'
             ],
             description: 'Какую задачу запустить'
-            )
+        )
         choice(
-        name: 'BROWSER',
-        choices: [
-            'chrome',
-            'firefox'
+            name: 'BROWSER',
+            choices: [
+                'chrome',
+                'firefox'
             ],
             description: 'В каком браузере запустить тесты'
-            )
+        )
     }
 
     tools {
@@ -28,8 +28,8 @@ pipeline {
     stages {
         stage('Check network') {
             steps {
-                sh 'ping -c 3 github.com'
-                sh 'curl -I --connect-timeout 5 https://github.com'
+                powershell 'Test-Connection github.com -Count 3'
+                powershell 'Invoke-WebRequest -Uri https://github.com -Method Head -TimeoutSec 5'
             }
         }
 
@@ -42,16 +42,15 @@ pipeline {
         stage('Verify Source Code') {
             steps {
                 echo "--- Checking WebDriverFactory.java ---"
-                sh '''
-                    grep -A 5 "BROWSER_NAME" src/test/java/by/onliner/core/driver/WebDriverFactory.java || true
+                powershell '''
+                    Select-String -Path "src/test/java/by/onliner/core/driver/WebDriverFactory.java" -Pattern "BROWSER_NAME" -Context 0,5
                 '''
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'chmod +x ./gradlew'
-                sh './gradlew --no-daemon dependencies'
+                powershell './gradlew --no-daemon dependencies'
             }
         }
 
@@ -63,11 +62,11 @@ pipeline {
                         def task = params.TEST_SCENARIO
 
                         echo "Running ${task} on ${browser}"
-                        sh "./gradlew clean ${task} -Dbrowser=${browser} --no-daemon"
+                        powershell "./gradlew clean ${task} -Dbrowser=${browser} --no-daemon"
 
                     } catch (Exception e) {
                         echo "Tests failed! Saving logs..."
-                        sh 'cat chromedriver.log || echo "No chromedriver.log"'
+                        powershell 'Get-Content chromedriver.log -ErrorAction SilentlyContinue'
                         archiveArtifacts artifacts: '**/screenshots/*.png', allowEmptyArchive: true
                         error("Tests failed!")
                     }
@@ -98,7 +97,6 @@ pipeline {
                 body: "Тесты упали: ${env.BUILD_URL}",
                 to: 'team@example.com'
             )
-            slackSend channel: '#ci-alerts', message: "❌ ${env.JOB_NAME} #${env.BUILD_NUMBER} упал!"
         }
     }
 }
