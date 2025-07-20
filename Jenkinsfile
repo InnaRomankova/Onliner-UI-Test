@@ -19,7 +19,6 @@ pipeline {
     }
 
     options {
-            gitConnectionTimeout(60)
             skipDefaultCheckout(true)
         }
 
@@ -33,8 +32,10 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/InnaRomankova/Onliner-UI-Test.git'
+                git (branch: 'main',
+                    url: 'https://github.com/InnaRomankova/Onliner-UI-Test.git',
+                    poll: false,
+                    timeout: 60)
             }
         }
 
