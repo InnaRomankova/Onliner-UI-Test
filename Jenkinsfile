@@ -34,8 +34,8 @@ pipeline {
             steps {
                 git (branch: 'main',
                     url: 'https://github.com/InnaRomankova/Onliner-UI-Test.git',
-                    poll: false,
-                    timeout: 60)
+                    poll: false
+                    )
             }
         }
 
