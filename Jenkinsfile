@@ -18,6 +18,11 @@ pipeline {
         allure 'allure-2.22.0'
     }
 
+    options {
+            gitConnectionTimeout(60)
+            skipDefaultCheckout(true)
+        }
+
     stages {
         stage('Check network') {
             steps {
@@ -28,7 +33,8 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/InnaRomankova/Onliner-UI-Test.git'
+                git branch: 'main',
+                    url: 'https://github.com/InnaRomankova/Onliner-UI-Test.git'
             }
         }
 
