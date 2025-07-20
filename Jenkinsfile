@@ -4,19 +4,12 @@ pipeline {
     parameters {
         choice(
             name: 'TEST_SCENARIO',
-            choices: [
-                'test',
-                'sanityTest',
-                'negativeTest'
-            ],
+            choices: ['test', 'sanityTest', 'negativeTest'],
             description: 'Какую задачу запустить'
         )
         choice(
             name: 'BROWSER',
-            choices: [
-                'chrome',
-                'firefox'
-            ],
+            choices: ['chrome', 'firefox'],
             description: 'В каком браузере запустить тесты'
         )
     }
@@ -29,7 +22,7 @@ pipeline {
         stage('Check network') {
             steps {
                 powershell 'Test-Connection github.com -Count 3'
-                powershell 'Invoke-WebRequest -Uri https://github.com -Method Head -TimeoutSec 5'
+                powershell 'Test-NetConnection github.com -Port 443 -InformationLevel Quiet'
             }
         }
 
