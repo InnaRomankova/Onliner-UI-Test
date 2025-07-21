@@ -3,6 +3,7 @@ package by.onliner.tests;
 import by.onliner.model.pages.MainPage;
 import by.onliner.model.pages.ProductPricingPage;
 import by.onliner.utils.listeners.ScreenshotOnFailureExtension;
+import by.onliner.utils.listeners.TestListener;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@ExtendWith(ScreenshotOnFailureExtension.class)
+@ExtendWith({ScreenshotOnFailureExtension.class, TestListener.class})
 public class CartTest extends BaseTest {
 
     @Test
