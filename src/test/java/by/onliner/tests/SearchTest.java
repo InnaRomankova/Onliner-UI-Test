@@ -3,6 +3,7 @@ package by.onliner.tests;
 import by.onliner.model.pages.MainPage;
 import by.onliner.model.pages.SearchedProductPage;
 import by.onliner.utils.listeners.ScreenshotOnFailureExtension;
+import by.onliner.utils.listeners.TestListener;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -10,7 +11,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-@ExtendWith(ScreenshotOnFailureExtension.class)
+@ExtendWith({ScreenshotOnFailureExtension.class, TestListener.class})
 public class SearchTest extends BaseTest {
 
     @Test
